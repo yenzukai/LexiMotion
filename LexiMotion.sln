@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LexiMotion.Web", "LexiMotion.Web\LexiMotion.Web.csproj", "{335FFC86-6C65-99A1-6A78-84C6EB453FBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{335FFC86-6C65-99A1-6A78-84C6EB453FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335FFC86-6C65-99A1-6A78-84C6EB453FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335FFC86-6C65-99A1-6A78-84C6EB453FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335FFC86-6C65-99A1-6A78-84C6EB453FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C2A675D-1C06-4506-9901-77500B4507F6}
+	EndGlobalSection
+EndGlobal
