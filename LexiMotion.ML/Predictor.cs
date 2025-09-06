@@ -28,33 +28,31 @@ namespace LexiMotion.ML
                 return;
             }
 
-            // 🔹 Detect negation separately
+            // Detect negation
             bool isNegated = TextPreprocessor.ContainsNegation(text);
 
+            // Predict emotion
             var input = new EmotionData { Text = text };
             var result = _predictionEngine.Predict(input);
 
-            Console.WriteLine($"Original Input: {text}");
-            Console.WriteLine($"Predicted Emotion: {result.PredictedEmotion}");
-            Console.WriteLine($"Negation Detected: {isNegated}");
+            // Predict sarcasm
+            bool isSarcastic = SarcasmPredictor.PredictSarcasm(text);
 
-            Console.WriteLine("Scores:");
+            // Final interpretation
+            string finalEmotion = InterpretationHelper.Interpret(result.PredictedEmotion, isNegated, isSarcastic);
+
+            Console.WriteLine($"Input: {text}");
+            Console.WriteLine($"Predicted Emotion: {result.PredictedEmotion}");
+            Console.WriteLine("Emotion Confidence Scores:");
             for (int i = 0; i < result.Score.Length && i < labels.Length; i += 2)
             {
                 string left = $"{labels[i]}: {result.Score[i]:F4}";
-
-                string right = (i + 1 < labels.Length)
-                    ? $"{labels[i + 1]}: {result.Score[i + 1]:F4}"
-                    : ""; // In case of odd number of labels
-
+                string right = (i + 1 < labels.Length) ? $"{labels[i + 1]}: {result.Score[i + 1]:F4}" : "";
                 Console.WriteLine($"  {left,-25}{right}");
             }
-
-            // Simple interpretation layer example
-            if (isNegated)
-            {
-                Console.WriteLine($"[Interpretation] The emotion might be the opposite of {result.PredictedEmotion}");
-            }
+            Console.WriteLine($"Negation Detected: {isNegated}");
+            Console.WriteLine($"Sarcasm Detected: {isSarcastic}");
+            Console.WriteLine($"Final Interpreted Emotion: {finalEmotion}");        
         }
     }
 }
