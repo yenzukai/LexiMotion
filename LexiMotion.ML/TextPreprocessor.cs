@@ -5,7 +5,7 @@ namespace LexiMotion.ML
     {
         private static readonly string[] negationWords =
         {
-            "not", "no", "never", "don't", "can't", "won't",
+            "not", "no", "nor", "neither", "never", "don't", "can't", "won't",
             "isn't", "wasn't", "shouldn't", "couldn't"
         };
 

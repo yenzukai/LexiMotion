@@ -1,6 +1,9 @@
 using Microsoft.ML;
 using Microsoft.ML.Data;
+using Npgsql;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
@@ -36,11 +39,12 @@ namespace LexiMotion.ML
             var result = _predictionEngine.Predict(input);
 
             // Predict sarcasm
-            bool isSarcastic = SarcasmPredictor.PredictSarcasm(text);
+            var sarcasmResult = SarcasmPredictor.PredictSarcasm(text);
 
             // Final interpretation
-            string finalEmotion = InterpretationHelper.Interpret(result.PredictedEmotion, isNegated, isSarcastic);
+            string finalEmotion = InterpretationHelper.Interpret(result.PredictedEmotion, isNegated, sarcasmResult.IsSarcastic);
 
+            // Print results
             Console.WriteLine($"Input: {text}");
             Console.WriteLine($"Predicted Emotion: {result.PredictedEmotion}");
             Console.WriteLine("Emotion Confidence Scores:");
@@ -51,8 +55,59 @@ namespace LexiMotion.ML
                 Console.WriteLine($"  {left,-25}{right}");
             }
             Console.WriteLine($"Negation Detected: {isNegated}");
-            Console.WriteLine($"Sarcasm Detected: {isSarcastic}");
-            Console.WriteLine($"Final Interpreted Emotion: {finalEmotion}");        
+            Console.WriteLine($"Sarcasm Detected: {sarcasmResult.IsSarcastic} (Prob: {sarcasmResult.Probability:P2})");
+            Console.WriteLine($"Final Interpreted Emotion: {finalEmotion}");
+
+            // Save result to SocialPost table
+            var scoreDict = new Dictionary<string, float>();
+            for (int i = 0; i < result.Score.Length && i < labels.Length; i++)
+            {
+                scoreDict[labels[i]] = result.Score[i];
+            }
+
+            DatabaseHelper.SaveSocialPost(
+                text,
+                result.PredictedEmotion,
+                scoreDict,
+                isNegated,
+                sarcasmResult.IsSarcastic,
+                sarcasmResult.Probability,
+                finalEmotion
+            );
+        }
+    }
+    
+    public static class DatabaseHelper
+    {
+        private static readonly string _connectionString = "Host=localhost;Port=5432;Username=postgres;Password=po01st23gr34es56;Database=LexiMotionDB";
+
+        public static void SaveSocialPost(
+            string inputText,
+            string predictedEmotion,
+            Dictionary<string, float> confidenceScores,
+            bool negationDetected,
+            bool sarcasmDetected,
+            float sarcasmProbability,
+            string finalEmotion)
+        {
+            using var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+
+            string sql = @"
+                INSERT INTO SocialPost 
+                (InputText, PredictedEmotion, ConfidenceScores, NegationDetected, SarcasmDetected, SarcasmProbability, FinalEmotion) 
+                VALUES (@text, @predEmotion, @scores, @neg, @sarcasm, @prob, @final);";
+
+            using var cmd = new NpgsqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("text", inputText);
+            cmd.Parameters.AddWithValue("predEmotion", predictedEmotion ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("scores", NpgsqlTypes.NpgsqlDbType.Jsonb, JsonConvert.SerializeObject(confidenceScores));
+            cmd.Parameters.AddWithValue("neg", negationDetected);
+            cmd.Parameters.AddWithValue("sarcasm", sarcasmDetected);
+            cmd.Parameters.AddWithValue("prob", sarcasmProbability);
+            cmd.Parameters.AddWithValue("final", finalEmotion ?? (object)DBNull.Value);
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

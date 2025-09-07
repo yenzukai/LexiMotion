@@ -35,18 +35,16 @@ namespace LexiMotion.ML
         }
         */
 
-        public static bool PredictSarcasm(string text)
+        public static SarcasmPrediction PredictSarcasm(string text)
         {
             if (_predictionEngine == null)
             {
                 Console.WriteLine("Sarcasm prediction engine not initialized.");
-                return false;
+                return new SarcasmPrediction { IsSarcastic = false, Probability = 0f, Score = 0f };
             }
 
             var input = new SarcasmData { Text = text };
-            var result = _predictionEngine.Predict(input);
-
-            return result.IsSarcastic;
+            return _predictionEngine.Predict(input);
         }
     }
 }

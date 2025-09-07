@@ -50,3 +50,5 @@ C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\obj\Debug\ne
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\obj\Debug\net9.0\LexiMotion.ML.pdb
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\obj\Debug\net9.0\LexiMotion.ML.genruntimeconfig.cache
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\obj\Debug\net9.0\ref\LexiMotion.ML.dll
+C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.ML\bin\Debug\net9.0\Npgsql.dll
