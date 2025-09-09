@@ -1,10 +1,148 @@
 ﻿@page
-@model IndexModel
+@model LexiMotion.Web.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "LexiMotion";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<link rel="stylesheet" href="../node_modules/picocss/pico/css/pico.min.css">
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<main class="container">
+    <h1>Multi-Emotion & Sarcasm-Aware Sentiment Analyzer</h1>
+    <p class="description">LexiMotion is an advanced sentiment analysis system designed to go beyond basic positive, negative, or neutral classifications. It incorporates additional layers such as a negation handler and a sarcasm detector.</p>
+    <p class="description">The system supports up to 28 fine-grained emotion categories, allowing for a more nuanced understanding of text. For emotion prediction, LexiMotion uses the Stochastic Dual Coordinated Ascent (SDCA) algorithm with Maximum Entropy Loss, while sarcasm detection is powered by SDCA Logistic Regression. With the three layers combined, this sentiment analysis tool provides reliable, context-aware analysis of social media posts, comments, and other forms of online communication.</p>
+    <p class="muted">Follow the steps below to analyze text or a social media URL.</p>
+
+    <form method="post" asp-page-handler="Analyze" id="analyzeForm">
+        <!-- Step 1: Input Type -->
+        <section class="step">
+            <h3>Step 1. Choose Input Type</h3>
+            <label>
+                <input type="radio" name="InputType" value="text" @(Model.InputType=="text" ? "checked" : "") onclick="toggleFields()" />
+                Text / Comment
+            </label>
+            <label>
+                <input type="radio" name="InputType" value="url" @(Model.InputType=="url" ? "checked" : "") onclick="toggleFields()" />
+                Social Media URL
+            </label>
+        </section>
+
+        <!-- Step 2: Input Field -->
+        <section class="step">
+            <h3>Step 2. Provide Your Input</h3>
+
+            <div id="textField">
+                <label for="InputValue">Text / Comment</label>
+                <textarea asp-for="InputValue" id="InputValue" rows="2" cols="100" placeholder="Type or paste your text here..."></textarea>
+            </div>
+
+            <div id="urlField" class="hidden">
+                <label for="InputValueUrl">Social Media URL</label>
+                <input type="url" id="InputValueUrl" placeholder="Type or paste your url here..." oninput="document.getElementById('InputValue').value=this.value" />
+            </div>
+
+            <div>
+                <button type="submit">Analyze</button>
+            </div>
+        </section>
+
+        <!-- Step 3: Loading Bar / Statur Bar-->
+        <section class="step hidden" itemid="loadingStep">
+            <h3>Step 3. Analyzing...</h3>
+            <div class="progress"><div></div></div>
+            <p class="muted">This may take a few seconds.</p>
+        </section>
+    </form>
+
+    <!-- Step 4: Output -->
+    @if (Model.Result is not null)
+    {
+        <section class="step">
+            <h3>Step 4. Results</h3>
+
+            <article>
+                <div class="kv"><strong>Input:</strong> <span>@Model.Result.InputText</span></div>
+                <div class="kv"><strong>Predicted Emotion:</strong> <span>@Model.Result.PredictedEmotion</span></div>
+                <div class="kv"><strong>Negation Detected:</strong> <span>@Model.Result.NegationDetected</span></div>
+                <div class="kv"><strong>Sarcasm Detected:</strong> <span>@Model.Result.SarcasmDetected</span></div>
+                <div class="kv"><strong>Sarcasm Probability:</strong> <span>@Model.Result.SarcasmProbability</span></div>
+                <div class="kv"><strong>Final Interpreted Emotion:</strong> <span>@Model.Result.FinalEmotion</span></div>
+            </article>
+
+            <div class="grid-2">
+                <article>
+                    <h4>Emotion Confidence Scores</h4>
+                    <canvas id="emotionChart"></canvas>
+                </article>
+
+                <article>
+                    <h4>Sarcasm Probability</h4>
+                    <canvas id="sarcasmChart"></canvas>
+                </article>
+            </div>
+        </section>
+
+        <script>
+            // Build data for emotion chart
+            const labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Result.ScoresSortedDesc.Select(k=>k.Key)));
+            const values = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Result.ScoresSortedDesc.Select(k=>k.Value)));
+
+            const ctx = document.getElementById('emotionChart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{ label: 'Confidence', data: values}]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true}
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            const sctx = document.getElementById('sarcasmChart');
+            new Chart(sctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Not Sarcastic', 'Sarcastic'], datasets:[{ label: 'Probability', data: [1 - @Model.Result.SarcasmProbability, @Model.Result.SarcasmProbability] }]
+                },
+                options: {
+                    scales: {
+                        y: {beginAtZero: true, max: 1}
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        </script>
+    }
+</main>
+
+<script>
+    function toggleFields() {
+        const isUrl = document.querySelector('input[name="InputType"]:checked').value === 'url';
+        document.getElementById('textField').classList.toggle('hidden', isUrl);
+        document.getElementById('urlField').classList.toggle('hidden', !isUrl);
+
+        if (isUrl) {
+            // keep model binding happy (single field Posts back)
+            const urlInput = document.getElementById('InputValueUrl');
+            document.getElementById('InputValue').value = urlInput.value;
+        }
+    }
+
+    // Show loading step when submitting
+    const form = document.getElementById('analyzeForm');
+    form.addEventListener('submit', function() {
+        document.getElementById('loadingStep').classList.remove('hidden');
+        window.scrollTo({ top: document.getElementById('loadingStep').offsetTop - 20, behavior: 'smooth' });
+    });
+
+    // Initialize visibility based on current selection
+    toggleFields();
+</script>
