@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Gidole&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 html {
   font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
@@ -12,12 +18,6 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-  scroll-behavior: smooth;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +25,6 @@ html {
 }
 
 body {
-  font-family: 'Fira Code', sans-serif;
   margin-bottom: 60px;
 }
 
@@ -36,6 +35,14 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.colored-text-purple {
+  color: #8251b6;
+}
+
+.colored-text-blue {
+  color: #6184d1;
 }
 
 .step {
@@ -53,6 +60,11 @@ body {
   display: grid; 
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  margin-top: 50px;
+}
+
+.grid-2 h4 {
+  color: #8251b6;
 }
 
 .progress {
@@ -111,24 +123,17 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.nav-item .nav-link {
+  color: #000000;
+  font-weight: normal;
+}
+
+.nav-link:hover {
+  color: #8251b6;
+}
+
 .navbar-brand img {
   width: 30px
-}
-
-a {
-  color: #0077cc;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
 }
 
 .border-top {

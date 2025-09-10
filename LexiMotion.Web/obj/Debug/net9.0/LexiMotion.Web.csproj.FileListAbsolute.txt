@@ -204,8 +204,6 @@ C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\n
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\8n78tr0z5g-muycvpuwrr.gz
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\fa07etb9xu-87fc7y1x7t.gz
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\y9pu6yuxiy-mlv21k5csn.gz
-C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\7ghrgad7vu-2g6bcw6fgs.gz
-C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\amfaq6uzmn-2g6bcw6fgs.gz
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\staticwebassets.development.json
@@ -218,7 +216,6 @@ C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\n
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\ref\LexiMotion.Web.dll
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\package-lock.json
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\package.json
-C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\7g2226i920-7s8q9cqlka.gz
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\refs\Microsoft.AspNetCore.Antiforgery.dll
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\refs\Microsoft.AspNetCore.Authentication.BearerToken.dll
@@ -517,3 +514,6 @@ C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\n
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\bin\Debug\net9.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\LexiMotion.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\7g2226i920-02c53hj49x.gz
+C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\7ghrgad7vu-w5ilrk584u.gz
+C:\Users\Yenzukai\Documents\AI-ML Projects\LexiMotion\LexiMotion.Web\obj\Debug\net9.0\compressed\amfaq6uzmn-w5ilrk584u.gz

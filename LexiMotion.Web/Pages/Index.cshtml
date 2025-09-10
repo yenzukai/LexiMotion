@@ -9,15 +9,15 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <main class="container">
-    <h1>Multi-Emotion & Sarcasm-Aware Sentiment Analyzer</h1>
-    <p class="description">LexiMotion is an advanced sentiment analysis system designed to go beyond basic positive, negative, or neutral classifications. It incorporates additional layers such as a negation handler and a sarcasm detector.</p>
-    <p class="description">The system supports up to 28 fine-grained emotion categories, allowing for a more nuanced understanding of text. For emotion prediction, LexiMotion uses the Stochastic Dual Coordinated Ascent (SDCA) algorithm with Maximum Entropy Loss, while sarcasm detection is powered by SDCA Logistic Regression. With the three layers combined, this sentiment analysis tool provides reliable, context-aware analysis of social media posts, comments, and other forms of online communication.</p>
+    <h1>Multi-<span class="colored-text-purple">Emotion</span> & <span class="colored-text-purple">Sarcasm</span>-Aware Sentiment Analyzer</h1>
+    <p class="description"><span class="colored-text-purple">LexiMotion</span> is an advanced sentiment analysis system designed to go beyond basic positive, negative, or neutral classifications. It incorporates additional layers such as a negation handler and a sarcasm detector.</p>
+    <p class="description">The system supports up to 28 fine-grained emotion categories, allowing for a more nuanced understanding of text. For emotion prediction, LexiMotion uses the <i>Stochastic Dual Coordinated Ascent (SDCA) algorithm with Maximum Entropy Loss</i>, while sarcasm detection is powered by <i>SDCA Logistic Regression</i>. With the three layers combined, this sentiment analysis tool provides reliable, context-aware analysis of social media posts, comments, and other forms of online communication.</p>
     <p class="muted">Follow the steps below to analyze text or a social media URL.</p>
 
     <form method="post" asp-page-handler="Analyze" id="analyzeForm">
         <!-- Step 1: Input Type -->
         <section class="step">
-            <h3>Step 1. Choose Input Type</h3>
+            <h3><span class="colored-text-purple">Step 1:</span> Choose Input Type</h3>
             <label>
                 <input type="radio" name="InputType" value="text" @(Model.InputType=="text" ? "checked" : "") onclick="toggleFields()" />
                 Text / Comment
@@ -30,7 +30,7 @@
 
         <!-- Step 2: Input Field -->
         <section class="step">
-            <h3>Step 2. Provide Your Input</h3>
+            <h3><span class="colored-text-purple">Step 2:</span> Provide Your Input</h3>
 
             <div id="textField">
                 <label for="InputValue">Text / Comment</label>
@@ -47,11 +47,19 @@
             </div>
         </section>
 
-        <!-- Step 3: Loading Bar / Statur Bar-->
-        <section class="step hidden" itemid="loadingStep">
-            <h3>Step 3. Analyzing...</h3>
-            <div class="progress"><div></div></div>
-            <p class="muted">This may take a few seconds.</p>
+        <!-- Step 3: Loading Bar / Status Bar-->
+        <section class="step @(Model.Result != null ? "" : "hidden")" id="loadingStep">
+            <h3><span class="colored-text-purple">Step 3:</span> 
+                @(Model.Result != null ? "Analysis Complete" : "Analyzing...")
+            </h3>
+            
+            <div class="progress @(Model.Result != null ? "hidden" : "")">
+                <div></div>
+            </div>
+            
+            <p class="muted">
+                @(Model.Result != null ? "You can now view the results below." : "This may take a few seconds.")
+            </p>
         </section>
     </form>
 
@@ -59,7 +67,7 @@
     @if (Model.Result is not null)
     {
         <section class="step">
-            <h3>Step 4. Results</h3>
+            <h3><span class="colored-text-purple">Step 4:</span> Results</h3>
 
             <article>
                 <div class="kv"><strong>Input:</strong> <span>@Model.Result.InputText</span></div>
@@ -130,19 +138,21 @@
         document.getElementById('urlField').classList.toggle('hidden', !isUrl);
 
         if (isUrl) {
-            // keep model binding happy (single field Posts back)
             const urlInput = document.getElementById('InputValueUrl');
             document.getElementById('InputValue').value = urlInput.value;
         }
     }
 
-    // Show loading step when submitting
     const form = document.getElementById('analyzeForm');
-    form.addEventListener('submit', function() {
-        document.getElementById('loadingStep').classList.remove('hidden');
-        window.scrollTo({ top: document.getElementById('loadingStep').offsetTop - 20, behavior: 'smooth' });
+    form.addEventListener('submit', function () {
+        const step3 = document.getElementById('loadingStep');
+        step3.classList.remove('hidden');  // show Step 3
+        step3.querySelector('h3').innerHTML = 
+            '<span class="colored-text-purple">Step 3:</span> Analyzing...';
+        step3.querySelector('.progress').classList.remove('hidden');
+        step3.querySelector('p').textContent = "This may take a few seconds.";
+        window.scrollTo({ top: step3.offsetTop - 20, behavior: 'smooth' });
     });
 
-    // Initialize visibility based on current selection
     toggleFields();
 </script>

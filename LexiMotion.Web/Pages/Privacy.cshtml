@@ -3,6 +3,54 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<h1 class="colored-text-purple">@ViewData["Title"]</h1>
+
+<p>
+    At <span class="colored-text-purple">LexiMotion</span>, we value your privacy and are committed to protecting any information you choose to share with us. 
+    This policy explains what data is collected, how it is processed, and how it is used.
+</p>
+
+<h3>1. Data Collection</h3>
+<ul>
+    <li>LexiMotion may collect text data provided directly by users (e.g., Reddit post or comment links submitted for analysis).</li>
+    <li>When using automated data gathering (e.g., research mode), the system may collect publicly available social media content such as Reddit posts or comments.</li>
+    <li>No personally identifiable information (PII) is required to use LexiMotion.</li>
+</ul>
+
+<h3>2. Data Usage</h3>
+<ul>
+    <li>Submitted text data is processed to detect emotions, negations, and sarcasm.</li>
+    <li>Analysis results may be stored in a PostgreSQL database for visualization and research purposes.</li>
+    <li>Data is used solely for sentiment and emotion analysis and is not sold, shared, or used for advertising.</li>
+</ul>
+
+<h3>3. Data Storage & Security</h3>
+<ul>
+    <li>All processed data is stored securely in PostgreSQL databases under controlled access.</li>
+    <li>Sensitive or personal user input is not logged unless explicitly permitted for research or testing.</li>
+    <li>We apply industry-standard security practices to safeguard stored data.</li>
+</ul>
+
+<h3>4. User Control</h3>
+<ul>
+    <li>Users control what data they submit for analysis (e.g., by providing a link or text).</li>
+    <li>If a user does not want their content processed, they should not provide links or text to the system.</li>
+    <li>Data can be deleted upon request during research or testing phases.</li>
+</ul>
+
+<h3>5. Research Context</h3>
+<ul>
+    <li>LexiMotion is a personal project focused on natural language processing, emotion detection, and sentiment analysis.</li>
+    <li>The system is not a commercial product and is intended for research, demonstration, and educational purposes only.</li>
+</ul>
+
+<h3>6. Contact</h3>
+<p>
+    For questions or concerns about this privacy policy, please contact the developer at 
+    <a href="mailto:emjayprojas@gmail.com">emjayprojas@gmail.com</a>.
+</p>
+
+<p><em>Last updated: September 10, 2025</em></p>

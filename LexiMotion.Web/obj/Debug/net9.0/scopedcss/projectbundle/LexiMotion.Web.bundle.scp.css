@@ -27,6 +27,7 @@ a[b-k3xrkbv5ru] {
 .border-top[b-k3xrkbv5ru] {
   border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom[b-k3xrkbv5ru] {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -44,6 +45,5 @@ button.accept-policy[b-k3xrkbv5ru] {
   position: absolute;
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
   line-height: 60px;
 }
