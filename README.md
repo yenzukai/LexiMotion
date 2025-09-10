@@ -94,6 +94,6 @@ cd LexiMotion
 
 # Restore dependencies
 dotnet restore
-```
+
 # Run the application
 dotnet run
