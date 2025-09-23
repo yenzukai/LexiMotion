@@ -15,7 +15,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
   > Extendable for Filipino context (e.g., “banat”, “mixed feelings”).  
 
 - **Negation Handler**  
-  - Regex + rule-based preprocessing for English & Tagalog.
+  - Regex + rule-based preprocessing for English Context.
 
 - **Sarcasm Detector**  
   - Binary classification (sarcastic / non-sarcastic).  
@@ -66,7 +66,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 - **Frontend:** Picocss, Chart.js  
 - **Database:** PostgreSQL  
 - **Machine Learning:**  
-  - SDCA, L-BFGS, LightGBM (ML.NET)  
+  - SDCA Logistic Regression (ML.NET)  
   - Regex-based preprocessing  
 
 ---
