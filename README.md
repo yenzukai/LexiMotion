@@ -9,7 +9,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 
 ---
 
-## ✨ Features
+## Features
 - **28 Fine-Grained Emotion Labels**  
   *admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity, desire, disappointment, disapproval, disgust, embarrassment, excitement, fear, gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief, remorse, sadness, surprise,* and *neutral*.  
   > Extendable for Filipino context (e.g., “banat”, “mixed feelings”).  
@@ -27,7 +27,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 
 ---
 
-## 🧠 Models Used
+## Models Used
 - **Emotion Prediction:**  
   - Stochastic Dual Coordinated Ascent (SDCA) with Maximum Entropy Loss.  
   - Alternative tests with L-BFGS and LightGBM.  
@@ -43,14 +43,14 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 
 ---
 
-## 📊 Data Sources
+## Data Sources
 - [GoEmotions Dataset (Google Research)](https://github.com/google-research/google-research/tree/master/goemotions) – 211k Reddit comments labeled across 27 emotions + neutral.  
 - Hugging Face Datasets.  
 - Kaggle corpora.
 
 ---
 
-## ⚙️ System Workflow
+## System Workflow
 1. User submits text (e.g., Reddit post/comment link).  
 2. System fetches raw content via API.  
 3. Preprocessing (tokenization, cleaning, negation handling).  
@@ -61,7 +61,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 - **Backend:** ASP.NET Core, ML.NET  
 - **Frontend:** Picocss, Chart.js  
 - **Database:** PostgreSQL  
@@ -71,7 +71,7 @@ The system processes social media text (e.g., Reddit posts and comments), analyz
 
 ---
 
-## 🔒 Privacy & Ethics
+## Privacy & Ethics
 LexiMotion prioritizes **privacy and ethical use**:  
 - Only processes publicly available or user-submitted text.  
 - No personal data collection.  
@@ -80,7 +80,7 @@ LexiMotion prioritizes **privacy and ethical use**:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - [.NET 8 SDK](https://dotnet.microsoft.com/)  
